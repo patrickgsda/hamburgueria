@@ -1,62 +1,76 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 
 interface AuthProps {
   children: ReactNode;
 }
 
-interface UserProps {
+interface UserData {
   email: string;
   password: string;
 }
 
-interface AuthProviderData {
-  authToken: string;
+interface User {
+  email: string;
+  id: number;
+  username: string;
+  age?: number;
+}
 
-  signIn: (userData: UserProps) => void;
+interface AuthProviderData {
+  token: string;
+  user: User[];
+  signIn: (data: UserData) => void;
 
   Logout: () => void;
 }
 
-export const AuthContext = createContext<AuthProviderData>(
-  {} as AuthProviderData
-);
+const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
 
-  const [authToken, setAuthToken] = useState(
-    () => localStorage.getItem("token") || ""
+  const [user, setUser] = useState<User[]>(
+    () => JSON.parse(localStorage.getItem("@user:hamburgueria2.0")!) || []
   );
 
-  const signIn = (userData: UserProps) => {
-    axios
-      .post("https://kenziehub.herokuapp.com/sessions", userData)
+  const [token, setToken] = useState<string>(
+    () => JSON.parse(localStorage.getItem("@token:hamburgueria2.0")!) || ""
+  );
+
+  const signIn = (data: UserData) => {
+    api
+      .post("/signin", data)
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem(
+          "@token:hamburgueria2.0",
+          JSON.stringify(response.data.accessToken)
+        );
+        setToken(response.data.accessToken);
+        localStorage.setItem(
+          "@user:hamburgueria2.0",
+          JSON.stringify(response.data.user)
+        );
+        setUser(response.data.user);
 
-        setAuthToken(response.data.token);
-
-        history.push("/dashboard");
+        toast.success("Login efetuado com sucesso!");
+        setTimeout(() => history.push("/"), 700);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => toast.error("E-mail ou senha incorretos!"));
   };
 
   const Logout = () => {
     localStorage.clear();
-
-    setAuthToken("");
-
+    setToken("");
     history.push("/login");
   };
 
   return (
-    <AuthContext.Provider
-      value={{ authToken, Logout, signIn }}
-      {...children}
-    ></AuthContext.Provider>
+    <AuthContext.Provider value={{ token, user, signIn, Logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
-
 export const useAuth = () => useContext(AuthContext);

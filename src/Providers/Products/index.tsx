@@ -18,6 +18,7 @@ interface Product {
   category: string;
   price: number;
   id: number;
+  quantity: number;
 }
 
 interface ProductsProviderData {
