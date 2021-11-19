@@ -16,9 +16,6 @@ const Header = () => {
         <h3>Kenzie</h3>
       </ContainerTitle>
       <ConatinerIcons>
-        <p>
-          <FaSearch />
-        </p>
         <div className="cart">
           <Card>
             <span>{cart.length}</span>

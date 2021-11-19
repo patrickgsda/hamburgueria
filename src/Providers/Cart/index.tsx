@@ -28,8 +28,6 @@ interface CartProviderData {
   addProduct: (product: Product) => void;
 
   deleteProduct: (product: Product) => void;
-
-  removeAll: () => void;
 }
 
 const CartContext = createContext<CartProviderData>({} as CartProviderData);
@@ -49,7 +47,20 @@ export const CartProvider = ({ children }: CartProps) => {
         setCart(response.data);
       })
       .catch((error) => console.log(error.response.data));
-  }, [token, user, cart]);
+  }, [token, user]);
+
+  useEffect(() => {
+    api
+      .get(`/users/${user}/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setCart(response.data);
+      })
+      .catch((error) => console.log(error.response.data));
+  }, [cart]);
 
   const addProduct = (product: Product) => {
     const productAdded = cart.find(
@@ -95,23 +106,8 @@ export const CartProvider = ({ children }: CartProps) => {
       .catch((error) => console.log("ei"));
   };
 
-  const removeAll = () => {
-    api
-      .patch(`/cart}`, [], {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("sucesso");
-      })
-      .catch((error) => console.log(error.response.data));
-  };
-
   return (
-    <CartContext.Provider
-      value={{ cart, addProduct, deleteProduct, removeAll }}
-    >
+    <CartContext.Provider value={{ cart, addProduct, deleteProduct }}>
       {children}
     </CartContext.Provider>
   );

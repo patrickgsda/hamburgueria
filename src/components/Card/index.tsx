@@ -3,9 +3,8 @@ import { Box } from "@material-ui/core";
 import { FaShoppingCart } from "react-icons/fa";
 import React, { ReactNode } from "react";
 import { useCart } from "../../Providers/Cart";
-import Button from "../Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ContainerImg } from "./styles";
+import { ContainerImg, H3 } from "./styles";
 // import { Container } from './styles';
 
 interface CardProps {
@@ -13,7 +12,7 @@ interface CardProps {
 }
 
 const Card = ({ children }: CardProps) => {
-  const { cart, deleteProduct, removeAll } = useCart();
+  const { cart, deleteProduct } = useCart();
   const totalProducts = cart.reduce(
     (total, product) => total + product.price,
     0
@@ -53,22 +52,19 @@ const Card = ({ children }: CardProps) => {
           {cart &&
             cart.map((product) => {
               return (
-                <>
-                  <ContainerImg>
-                    <img src={product.image} alt="" />
-                    <p>
-                      {product.name}
-                      <br />
-                      R$ {product.price.toFixed(2)}
-                    </p>
-                    <IconButton
-                      onClick={() => deleteProduct(product)}
-                      aria-label="delete"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ContainerImg>
-                </>
+                <ContainerImg>
+                  <img src={product.image} alt="" />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h3>{product.name}</h3>
+                    <h4>R$ {product.price.toFixed(2)}</h4>
+                  </div>
+                  <IconButton
+                    onClick={() => deleteProduct(product)}
+                    aria-label="delete"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ContainerImg>
               );
             })}
           {cart.length === 0 && <h3>Seu carrinho está vazio!</h3>}
@@ -81,8 +77,9 @@ const Card = ({ children }: CardProps) => {
               color: "var(--color-primary)",
             }}
           >
-            <Button onClick={() => removeAll()}>Remover Todos</Button>
-            <p>R$ {totalProducts.toFixed(2)}</p>
+            <H3 className="total">
+              Total do Carrinho: R$ {totalProducts.toFixed(2)}
+            </H3>
           </div>
         </Box>
       </Modal>
