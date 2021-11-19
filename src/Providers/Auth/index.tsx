@@ -51,9 +51,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setToken(response.data.accessToken);
         localStorage.setItem(
           "@user:hamburgueria2.0",
-          JSON.stringify(response.data.user)
+          JSON.stringify(response.data.user.id)
         );
-        setUser(response.data.user);
+        setUser(response.data.user.id);
 
         toast.success("Login efetuado com sucesso!");
         setTimeout(() => history.push("/"), 700);

@@ -7,6 +7,8 @@ import { Link, useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { Redirect } from "react-router-dom";
+import { useAuth } from "../../Providers/Auth";
 // import Header from "../../components/Header";
 
 interface UserData {
@@ -27,6 +29,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserData>({ resolver: yupResolver(schema) });
 
+  const { token } = useAuth();
+
   const createUser = (data: UserData) => {
     const newData = {
       email: data.email,
@@ -46,6 +50,10 @@ const Register = () => {
       })
       .catch((error) => toast.error(error.response.data));
   };
+
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>

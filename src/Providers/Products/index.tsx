@@ -37,7 +37,7 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
       .get("/products")
       .then((response) => setProducts(response.data))
       .catch((error) => toast.error("Algo de errado não está certo..."));
-  });
+  }, []);
 
   return (
     <ProductsContext.Provider value={{ products }}>

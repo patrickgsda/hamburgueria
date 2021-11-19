@@ -9,11 +9,11 @@ interface ProvidersProps {
 
 const Providers = ({ children }: ProvidersProps) => {
   return (
-    <CartProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <CartProvider>
         <ProductsProvider>{children}</ProductsProvider>
-      </AuthProvider>
-    </CartProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 };
 

@@ -12,15 +12,19 @@ export const Container = styled.div`
 export const ContainerTitle = styled.div`
   display: flex;
   align-items: baseline;
+  cursor: pointer;
+
   h1 {
     font-size: 26px;
     font-weight: bold;
     margin-right: 10px;
+    cursor: pointer;
   }
   h3 {
     font-size: 18px;
     font-weight: bold;
     color: var(--color-secondary);
+    cursor: pointer;
   }
 `;
 
@@ -29,5 +33,19 @@ export const ConatinerIcons = styled.div`
   font-size: 23px;
   p {
     margin: 10px;
+    cursor: pointer;
+  }
+  .cart {
+    display: flex;
+    align-items: center;
+    span {
+      color: var(--gray0);
+      background-color: var(--color-primary);
+      border-radius: 7px;
+      font-size: 15px;
+      padding: 3px;
+      top: -10px;
+      position: relative;
+    }
   }
 `;
