@@ -71,6 +71,7 @@ const Card = ({ children }: CardProps) => {
                 </>
               );
             })}
+          {cart.length === 0 && <h3>Seu carrinho está vazio!</h3>}
           <div
             style={{
               display: "flex",

@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const Logout = () => {
     localStorage.clear();
     setToken("");
-    history.push("/login");
+    history.push("/");
   };
 
   return (

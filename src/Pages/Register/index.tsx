@@ -12,13 +12,10 @@ import { useAuth } from "../../Providers/Auth";
 // import Header from "../../components/Header";
 
 interface UserData {
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;
-  phone: string;
-  oab: string;
-  state: string;
-  username: string;
 }
 
 const Register = () => {
@@ -35,9 +32,6 @@ const Register = () => {
     const newData = {
       email: data.email,
       password: data.password,
-      phone: data.phone,
-      oab: data.oab,
-      state: data.state,
       username: data.username,
     };
 
@@ -57,27 +51,10 @@ const Register = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <Container>
         <FormContainer>
           <h1>Cadastro</h1>
           <form onSubmit={handleSubmit(createUser)}>
-            <Input
-              placeholder="OAB"
-              name="oab"
-              type="number"
-              width="47%"
-              register={register}
-              error={errors.oab?.message}
-            />
-            <Input
-              type="text"
-              name="state"
-              width="47%"
-              placeholder="Estado"
-              register={register}
-              error={errors.state?.message}
-            />
             <Input
               placeholder="Nome de Usuário"
               name="username"
@@ -92,13 +69,6 @@ const Register = () => {
               type="email"
               register={register}
               error={errors.email?.message}
-            />
-            <Input
-              placeholder="Telefone"
-              name="phone"
-              type="number"
-              register={register}
-              error={errors.phone?.message}
             />
             <Input
               placeholder="Senha"
@@ -116,7 +86,7 @@ const Register = () => {
             />
             <Button type="submit">Cadastrar</Button>
             <p>
-              Já possui um cadastro? <Link to="/login">faça seu login</Link>
+              Já possui um cadastro? <Link to="/">faça seu login</Link>
             </p>
           </form>
         </FormContainer>

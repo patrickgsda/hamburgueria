@@ -4,9 +4,11 @@ import { FiLogOut } from "react-icons/fi";
 import { ConatinerIcons, Container, ContainerTitle } from "./styles";
 import Card from "../Card";
 import { useCart } from "../../Providers/Cart";
+import { useAuth } from "../../Providers/Auth";
 
 const Header = () => {
   const { cart } = useCart();
+  const { Logout } = useAuth();
   return (
     <Container>
       <ContainerTitle>
@@ -23,7 +25,7 @@ const Header = () => {
           </Card>
         </div>
         <p>
-          <FiLogOut />
+          <FiLogOut onClick={() => Logout()} />
         </p>
       </ConatinerIcons>
     </Container>

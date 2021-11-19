@@ -19,7 +19,6 @@ const Products = () => {
               <h3>{product.name}</h3>
               <p className="description">{product.category}</p>
               <p className="price">R$ {product.price.toFixed(2)}</p>
-              <p className="quantidade">qntd {product.quantity}</p>
               <Button onClick={() => addProduct(product)}>Adicionar</Button>
             </ContainerInfos>
           </Card>
