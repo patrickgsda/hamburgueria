@@ -38,6 +38,7 @@ export const ConatinerIcons = styled.div`
   .cart {
     display: flex;
     align-items: center;
+    cursor: pointer;
     span {
       color: var(--gray0);
       background-color: var(--color-primary);

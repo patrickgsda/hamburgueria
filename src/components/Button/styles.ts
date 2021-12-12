@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.button`
   background: var(--color-primary);
-  color: white;
   font-size: 16px;
-  font-weight: bold;
-  width: 130px;
-  height: 50px;
+  color: white;
+  width: 100%;
+  height: 60px;
   border: none;
   border-radius: 5px;
+  opacity: 0.9;
 
   :hover {
-    transition: 0.4s;
-    opacity: 0.5;
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  :active {
+    background: var(--color-primary);
   }
 `;

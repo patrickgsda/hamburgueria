@@ -23,7 +23,7 @@ interface AuthProviderData {
   token: string;
   user: User[];
   signIn: (data: UserData) => void;
-
+  registerUser: (data: UserData) => void;
   Logout: () => void;
 }
 
@@ -61,6 +61,16 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .catch((error) => toast.error("E-mail ou senha incorretos!"));
   };
 
+  const registerUser = (data: UserData) => {
+    api
+    .post("/register", data)
+    .then((response) => {
+      toast.success("Registro efetuado com sucesso!");
+      setTimeout(() => history.push("/"), 700);
+    })
+    .catch((error) => toast.error("E-mail ou senha incorretos!"));
+  }
+
   const Logout = () => {
     localStorage.clear();
     setToken("");
@@ -68,7 +78,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, signIn, Logout }}>
+    <AuthContext.Provider value={{ token, user, signIn, registerUser, Logout }}>
       {children}
     </AuthContext.Provider>
   );

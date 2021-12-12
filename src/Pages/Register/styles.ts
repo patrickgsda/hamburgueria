@@ -10,14 +10,51 @@ export const Container = styled.div`
   overflow-x: hidden;
 
   ::-webkit-scrollbar {
-    display: none;
+        display: none;
+        }
+
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  @-webkit-keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
   }
+  50% {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+  @keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  } 
+
 `;
 
 export const FormContainer = styled.div`
   width: 90%;
   max-width: 500px;
-  margin-top: 250px;
+  margin-top: 150px;
 
   h1 {
     font-size: 24px;

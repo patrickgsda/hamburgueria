@@ -8,6 +8,12 @@ export const Container = styled.div`
 
   input {
     font-size: 16px;
+    background: var(--gray-0);
+    border: none;
+    width: 100%;
+  }
+
+  .input {
     width: 100%;
     height: 60px;
     display: flex;

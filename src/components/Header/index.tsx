@@ -1,8 +1,7 @@
 import React from "react";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { ConatinerIcons, Container, ContainerTitle } from "./styles";
-import Card from "../Card";
+import Cart from "../Cart";
 import { useCart } from "../../Providers/Cart";
 import { useAuth } from "../../Providers/Auth";
 
@@ -17,9 +16,9 @@ const Header = () => {
       </ContainerTitle>
       <ConatinerIcons>
         <div className="cart">
-          <Card>
+          <Cart>
             <span>{cart.length}</span>
-          </Card>
+          </Cart>
         </div>
         <p>
           <FiLogOut onClick={() => Logout()} />

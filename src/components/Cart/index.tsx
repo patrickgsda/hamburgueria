@@ -11,7 +11,7 @@ interface CardProps {
   children: ReactNode;
 }
 
-const Card = ({ children }: CardProps) => {
+const Cart = ({ children }: CardProps) => {
   const { cart, deleteProduct } = useCart();
   const totalProducts = cart.reduce(
     (total, product) => total + product.price,
@@ -77,9 +77,9 @@ const Card = ({ children }: CardProps) => {
               color: "var(--color-primary)",
             }}
           >
-            <H3 className="total">
+            {cart.length > 0 && <H3 className="total">
               Total do Carrinho: R$ {totalProducts.toFixed(2)}
-            </H3>
+            </H3>}
           </div>
         </Box>
       </Modal>
@@ -87,4 +87,4 @@ const Card = ({ children }: CardProps) => {
   );
 };
 
-export default Card;
+export default Cart;

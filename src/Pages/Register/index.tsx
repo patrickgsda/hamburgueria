@@ -26,23 +26,28 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserData>({ resolver: yupResolver(schema) });
 
-  const { token } = useAuth();
+  const { token, registerUser } = useAuth();
 
-  const createUser = (data: UserData) => {
-    const newData = {
-      email: data.email,
-      password: data.password,
-      username: data.username,
-    };
+  // const createUser = (data: UserData) => {
+  //   const newData = {
+  //     email: data.email,
+  //     password: data.password,
+  //     username: data.username,
+  //   };
 
-    api
-      .post("/signup", newData)
-      .then((response) => {
-        console.log(response.data.user);
-        toast.success("Conta criada");
-        setTimeout(() => history.push("/login"), 2000);
-      })
-      .catch((error) => toast.error(error.response.data));
+  //   api
+  //     .post("/register", newData)
+  //     .then((response) => {
+  //       console.log(response.data.user);
+  //       toast.success("Conta criada");
+  //       setTimeout(() => history.push("/login"), 2000);
+  //     })
+  //     .catch((error) => toast.error(error.response.data));
+  // };
+
+  const onSubmitForm = (data: UserData) => {
+    console.log('eae porra')
+    registerUser(data);
   };
 
   if (token) {
@@ -54,7 +59,7 @@ const Register = () => {
       <Container>
         <FormContainer>
           <h1>Cadastro</h1>
-          <form onSubmit={handleSubmit(createUser)}>
+          <form onSubmit={handleSubmit(onSubmitForm)}>
             <Input
               placeholder="Nome de Usuário"
               name="username"

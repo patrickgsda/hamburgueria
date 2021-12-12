@@ -7,6 +7,7 @@ import {
 } from "react";
 import api from "../../services/api";
 import { useAuth } from "../Auth";
+import { toast } from "react-toastify";
 
 interface CartProps {
   children: ReactNode;
@@ -77,7 +78,6 @@ export const CartProvider = ({ children }: CartProps) => {
       userId: user,
     };
 
-    console.log(productAdded);
     if (!productAdded) {
       api
         .post(`/cart`, newProduct, {
@@ -85,10 +85,12 @@ export const CartProvider = ({ children }: CartProps) => {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          toast.success('Produto adicionado!')
         })
-        .catch((error) => console.log(error.response.data));
+        .catch();
+    } else{
+      toast.error('Produto já está adicionado.')
     }
   };
 
